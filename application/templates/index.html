@@ -1,0 +1,94 @@
+{% extends 'page_layout.html' %}
+
+{% block body %}
+
+
+<div class="main_container container-fluid">
+    {% include 'components/navbar.html' %}
+    <div class="row main_row">
+        <div class="col-sm-4  preview">
+            <div class="mobile">
+                <img src="{{ url_for('static', filename = 'images/phone.png') }}" alt="" class="img-fluid phone">
+                <div class="mobile_sub_wraper">
+                    
+                    <div class="imagebox">
+                        <img src="{{ url_for('static' , filename = 'images/user.jpg') }}" alt="profile"
+                            class=" profile">
+                    </div>
+                    <div class="profileInfo">
+                        <h3>Your Name</h3>
+                        <p>email@email.com</p>
+                    </div>
+                    <div class="linksBox">
+                        <ul class="linkBoxWrapper">
+                            
+                           
+                           
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col settings">
+            <div class="addLinkButton">
+                <h3>Customize your links</h3>
+                <p>Add/edit/remove links below and then share all your profiles with the world</p>
+                <button id="addLink" class="myButton"><span><i class="fa-solid fa-plus"></i></span>Add new link</button>
+            </div>
+            <div class="links">
+                <!-- <div class="link">
+                    <div class="link_heading">
+                        <p>Link #1</p>
+                        <p>Remove</p>
+                    </div>
+                    <label>Platform</label>
+                    <div class="select_wrapper">
+                        <div class="select form-control"><span>Select Social Links</span><span class="arrow"><i class="fa-solid fa-chevron-down"></i></span></div>
+                        <ul>
+                            <li class="option"><span><i class="fa-brands fa-github"></i></span>GitHub</li>
+                            <li class="option"><span><i class="fa-brands fa-facebook"></i></span>Facebook</li>
+                            <li class="option"><span><i class="fa-brands fa-x-twitter"></i></span>Twitter</li>
+                            <li class="option"><span><i class="fa-brands fa-instagram"></i></span>Instagram</li>
+                        </ul>
+                    </div>
+                    <label >Link</label>
+                    <div class="link_icon">
+                        <span><i class="fa-solid fa-link"></i></span>
+                        <input type="text" class="form-control">
+                    </div>
+                    
+                </div>
+
+
+
+                <div class="link">
+                    <div class="link_heading">
+                        <p>Link #1</p>
+                        <p>Remove</p>
+                    </div>
+                    <label>Platform</label>
+                    <div class="select_wrapper">
+                        <div class="select form-control"><span>Select Social Links</span><span class="arrow"><i class="fa-solid fa-chevron-down"></i></span></div>
+                        <ul>
+                            <li class="option"><span><i class="fa-brands fa-github"></i></span>GitHub</li>
+                            <li class="option"><span><i class="fa-brands fa-facebook"></i></span>Facebook</li>
+                            <li class="option"><span><i class="fa-brands fa-x-twitter"></i></span>Twitter</li>
+                            <li class="option"><span><i class="fa-brands fa-instagram"></i></span>Instagram</li>
+                        </ul>
+                    </div>
+                    <label >Link</label>
+                    <div class="link_icon">
+                        <span><i class="fa-solid fa-link"></i></span>
+                        <input type="text" class="form-control">
+                    </div>
+                    
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename = 'js/link.js') }}"></script>
+{% endblock %}

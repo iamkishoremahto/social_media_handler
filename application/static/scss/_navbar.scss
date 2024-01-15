@@ -1,0 +1,83 @@
+.myButton{
+    padding: 10px 15px;
+    background-color: $ligh_purple;
+    color: $purple;
+    border: none;
+    outline:none;
+    border-radius: 10px;
+
+    span{
+        margin-right: 8px;
+    }
+}
+
+.navbar_wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $white;
+    margin: 20px;
+    height: 90px;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    .col{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+
+        &:first-child{
+            h1{
+                font-weight: 900;
+                span{
+                    margin-right: 10px;
+                    background-color: $purple;
+                    padding: 5px;
+                    color:$white;
+                    border-radius: 8px;
+                }
+
+            }
+        }
+
+        &:last-child{
+            button{
+                &:first-child{
+                    background-color: transparent;
+                    color: $gray;
+                    border:none;
+
+                    span{
+                        margin-right: 10px;
+                    }
+                }
+
+                &:last-child{
+                    background-color: transparent;
+                    border: 2px solid $ligh_purple;
+                }
+
+
+            }
+
+        }
+        
+    }
+}
+
+
+.link_icon{
+    position: relative;
+
+    span{
+        position: absolute;
+        top:50%;
+        left:10px;
+        transform: translateY(-50%);
+    }
+    input{
+        padding-left: 40px;
+    }
+}
