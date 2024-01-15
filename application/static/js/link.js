@@ -113,3 +113,7 @@ function linkButtonHandler(){
 
 
 link_box_handler()
+
+// let offset = document.querySelector('.settings').offsetLeft
+// document.querySelector('.settings').style.right = -offset*2 + 'px'
+// console.log(offset);

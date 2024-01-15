@@ -9,6 +9,7 @@
     height: calc(100vh - 180px);
     margin-left: 20px;
     margin-right: 20px;
+    
 }
 .preview{
     display: flex;
@@ -23,6 +24,7 @@
 }
 
 .settings{
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-start;
