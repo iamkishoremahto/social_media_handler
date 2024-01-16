@@ -13,7 +13,7 @@
                     
                     <div class="imagebox">
                         <img src="{{ url_for('static' , filename = 'images/user.jpg') }}" alt="profile"
-                            class=" profile">
+                            class=" profile profile_pic">
                     </div>
                     <div class="profileInfo">
                         <h3>Your Name</h3>
@@ -29,62 +29,49 @@
                 </div>
             </div>
         </div>
-        <div class="col settings">
-            <div class="addLinkButton">
-                <h3>Customize your links</h3>
-                <p>Add/edit/remove links below and then share all your profiles with the world</p>
-                <button id="addLink" class="myButton"><span><i class="fa-solid fa-plus"></i></span>Add new link</button>
+        <div class="col setting_wrapper">
+            <div class="settings">
+                <div class="addLinkButton">
+                    <h3>Customize your links</h3>
+                    <p>Add/edit/remove links below and then share all your profiles with the world</p>
+                    <button id="addLink" class="myButton"><span><i class="fa-solid fa-plus"></i></span>Add new link</button>
+                </div>
+                <div class="links">
+                    
+                </div>
+                <button class="myButton nextBtn">Next</button>
             </div>
-            <div class="links">
-                <!-- <div class="link">
-                    <div class="link_heading">
-                        <p>Link #1</p>
-                        <p>Remove</p>
-                    </div>
-                    <label>Platform</label>
-                    <div class="select_wrapper">
-                        <div class="select form-control"><span>Select Social Links</span><span class="arrow"><i class="fa-solid fa-chevron-down"></i></span></div>
-                        <ul>
-                            <li class="option"><span><i class="fa-brands fa-github"></i></span>GitHub</li>
-                            <li class="option"><span><i class="fa-brands fa-facebook"></i></span>Facebook</li>
-                            <li class="option"><span><i class="fa-brands fa-x-twitter"></i></span>Twitter</li>
-                            <li class="option"><span><i class="fa-brands fa-instagram"></i></span>Instagram</li>
-                        </ul>
-                    </div>
-                    <label >Link</label>
-                    <div class="link_icon">
-                        <span><i class="fa-solid fa-link"></i></span>
-                        <input type="text" class="form-control">
+
+            <div class="user_profile_setting">
+                <div class="addLinkButton">
+                    <h3>Profile Details</h3>
+                    <p>Add your details to create a personal touch to your profile</p>
+                   
+                </div>
+                <div class="userProfileImage">
+                    
+                    <input type="file" id="upload_profile">
+                    <div class="uploader">
+                        <img src="{{ url_for('static', filename = 'images/user.jpg') }}" alt="user" class="img-fluid user profile_pic">
                     </div>
                     
                 </div>
+                <div class="user_profile_details">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="name" placeholder="Your Full Name">
+                        <label for="name">Full Name</label>
+                      </div>
+                      <div class="form-floating">
+                        <input type="email" class="form-control" id="email" placeholder="Your Email">
+                        <label for="email">Your Email</label>
+                      </div>
+                </div>
 
-
-
-                <div class="link">
-                    <div class="link_heading">
-                        <p>Link #1</p>
-                        <p>Remove</p>
-                    </div>
-                    <label>Platform</label>
-                    <div class="select_wrapper">
-                        <div class="select form-control"><span>Select Social Links</span><span class="arrow"><i class="fa-solid fa-chevron-down"></i></span></div>
-                        <ul>
-                            <li class="option"><span><i class="fa-brands fa-github"></i></span>GitHub</li>
-                            <li class="option"><span><i class="fa-brands fa-facebook"></i></span>Facebook</li>
-                            <li class="option"><span><i class="fa-brands fa-x-twitter"></i></span>Twitter</li>
-                            <li class="option"><span><i class="fa-brands fa-instagram"></i></span>Instagram</li>
-                        </ul>
-                    </div>
-                    <label >Link</label>
-                    <div class="link_icon">
-                        <span><i class="fa-solid fa-link"></i></span>
-                        <input type="text" class="form-control">
-                    </div>
-                    
-                </div> -->
+                <button class="myButton saveBtn">Save</button>
             </div>
+
         </div>
+        
     </div>
 </div>
 {% endblock %}

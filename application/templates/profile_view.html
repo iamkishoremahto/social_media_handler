@@ -1,0 +1,29 @@
+{% extends "page_layout.html" %}
+
+{% block body %}
+
+<div class="container-fluid profileViewMainWrapper">
+    <div class="row profileViewRow">
+        <div class="col profileViewCol">
+            <div class="image_wrapper_profileView">
+                <img src="{{ url_for('static', filename = 'images/user.jpg') }}" alt="image" class="img-fluid">
+      
+            </div>
+            <div class="profileDetailsView">
+                <h3>Kishore Kumar Mahto</h3>
+                <p>kishore@gmail.com</p>
+            </div>
+            <div class="linksView">
+             <ul class="linkWrapper">
+                <li class = "link_icons">
+                    <a href="#" target = "_blank"><span class="icon"><i class="fa-brands fa-bandcamp"></i>Social Media</span><span class="arrow"><i
+                        class="fa-solid fa-arrow-right"></i></span></a>
+                </li>
+             
+             </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

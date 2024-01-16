@@ -9,7 +9,7 @@ let social_color = {
 }
 
 
-function dropdownHandler(new_div,link_button) {
+function dropdownHandler(new_div, link_button) {
 
     let select_wrapper = new_div.querySelectorAll(".select_wrapper");
     select_wrapper.forEach((select_wrapper_item) => {
@@ -29,18 +29,19 @@ function dropdownHandler(new_div,link_button) {
                     select2.innerHTML = option.innerHTML;
                     let selected_option_text = option.textContent;
                     let selected_option_icon
-                    if(selected_option_text === "Twitter"){
-                       selected_option_icon = "x-" + selected_option_text.toLowerCase()
+                    if (selected_option_text === "Twitter") {
+                        selected_option_icon = "x-" + selected_option_text.toLowerCase()
                     }
-                    else{
+                    else {
                         selected_option_icon = selected_option_text.toLowerCase()
                     }
-
+                    
                     link_button.querySelector('.icon').innerHTML = `<i
                     class="fa-brands fa-${selected_option_icon}"></i>${selected_option_text}</span>`
                     console.log(social_color[selected_option_text])
                     link_button.style.backgroundColor = `${social_color[selected_option_text]}`;
                     select_options.classList.remove('show');
+                    
                     arrow.classList.remove("arrow_rotate");
                 });
             })
@@ -88,19 +89,19 @@ function link_box_handler() {
             link_button.remove();
         });
         let new_div_inputBox = new_div.querySelector(".link_icon input");
-        new_div_inputBox.addEventListener('change',(e) =>{
+        new_div_inputBox.addEventListener('change', (e) => {
             let linkValue = e.target.value;
             link_button.querySelector('a').href = linkValue;
         });
 
         LinkWrapper.appendChild(new_div)
-        dropdownHandler(new_div,link_button);
+        dropdownHandler(new_div, link_button);
     });
 
 }
 
 
-function linkButtonHandler(){
+function linkButtonHandler() {
     let linkButtonBox = document.querySelector('.linkBoxWrapper');
     let newLinkButton = document.createElement('li');
     newLinkButton.classList.add('link_icons');
@@ -110,10 +111,123 @@ function linkButtonHandler(){
     return newLinkButton
 
 }
+function profileDetailsHandler() {
+    let offset = document.querySelector('.user_profile_setting').offsetWidth
 
 
+    document.querySelector('.user_profile_setting').style.left = 0 + 'px'
+}
+
+function LinksHandler() {
+    let offset = document.querySelector('.user_profile_setting').offsetWidth
+    document.querySelector('.user_profile_setting').style.left = offset + 50 + 'px'
+
+}
+
+function linkSettingsHandler() {
+
+    let offset = document.querySelector('.user_profile_setting').offsetWidth
+    document.querySelector('.user_profile_setting').style.left = offset + 50 + 'px'
+
+
+
+    let profileDetails = document.getElementById("profile_details");
+    let links = document.getElementById("links");
+    profileDetails.addEventListener('click', profileDetailsHandler);
+    links.addEventListener('click', LinksHandler);
+}
+
+
+
+function readFileAsDataURL(reader, file) {
+    return new Promise((resolve, reject) => {
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
+
+async function profilePicHandler() {
+    let imageUploadBtn = document.querySelector('.uploader')
+    var uploadBtn = document.getElementById('upload_profile')
+    uploadBtn.addEventListener('change', async (e) => {
+        let image = e.target.files[0];
+
+        if (image) {
+            // Create a FileReader
+            let reader = new FileReader();
+
+            const dataURL = await readFileAsDataURL(reader, image);
+            let profileFields = document.querySelectorAll('.profile_pic');
+            profileFields.forEach((profileField) => {
+                profileField.src = dataURL;
+            })
+
+        }
+
+     
+    });
+    imageUploadBtn.addEventListener('click', () => {
+
+        uploadBtn.click();
+    })
+
+
+}
+
+function emailFieldHandler(){
+    let email = document.querySelector('#email');
+
+    email.addEventListener('keydown', () =>{
+        let nameChange = document.querySelector('.profileInfo p');
+        nameChange.textContent = email.value;
+    })
+
+    email.addEventListener('change', () =>{
+        let nameChange = document.querySelector('.profileInfo p');
+        nameChange.textContent = email.value;
+    })
+    
+}
+
+function nameFieldHandler(){
+    let name = document.getElementById('name');
+    name.addEventListener('keydown', () =>{
+        let nameChange = document.querySelector('.profileInfo h3');
+        nameChange.textContent = name.value;
+    })
+
+    name.addEventListener('change', () =>{
+        let nameChange = document.querySelector('.profileInfo h3');
+        nameChange.textContent = name.value;
+    })
+}
+
+async function updateProfileDetailsIntoDB(){
+    let profile_pic = document.querySelector('.imagebox .profile').src;
+    let name = document.querySelector('.profileInfo h3').textContent;
+    let email = document.querySelector('.profileInfo p').textContent;
+    console.log(profile_pic)
+    console.log(name)
+    console.log(email)
+    let links = document.querySelectorAll('.linkBoxWrapper li a')
+    let linksObject = {};
+    links.forEach((link) =>{
+        let value = link.href
+        let key = link.querySelector('.icon').textContent
+        let backgroundColor = link.style.backgroundColor;
+        let icon = link.querySelector('.icon').classList[1]
+        linksObject[key] = {href: value, icon: icon, background:backgroundColor, icon}
+    })
+    console.log(linksObject)
+}
+
+emailFieldHandler()
+nameFieldHandler();
 link_box_handler()
+linkSettingsHandler()
+profilePicHandler()
+document.querySelector('.nextBtn').addEventListener('click', profileDetailsHandler);
+document.querySelector('.saveBtn').addEventListener('click', updateProfileDetailsIntoDB);
 
-// let offset = document.querySelector('.settings').offsetLeft
-// document.querySelector('.settings').style.right = -offset*2 + 'px'
-// console.log(offset);
+

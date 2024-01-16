@@ -74,6 +74,7 @@
   height: 100vh;
   background-color: #efefef;
   border: 2px solid transparent;
+  overflow-y: auto;
 }
 
 .main_row {
@@ -93,8 +94,19 @@
   border-radius: 15px;
 }
 
-.settings {
+.setting_wrapper {
   position: relative;
+  height: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  display: flex;
+}
+
+.settings,
+.user_profile_setting {
+  position: relative;
+  height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -105,24 +117,35 @@
   padding: 20px;
   padding-top: 50px;
 }
-.settings .addLinkButton {
+.settings .addLinkButton,
+.user_profile_setting .addLinkButton {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   width: 100%;
 }
-.settings .addLinkButton h3 {
+.settings .addLinkButton h3,
+.user_profile_setting .addLinkButton h3 {
   font-weight: 700;
 }
-.settings .addLinkButton p {
+.settings .addLinkButton p,
+.user_profile_setting .addLinkButton p {
   color: gray;
   font-size: 0.7rem;
 }
-.settings .addLinkButton button {
+.settings .addLinkButton button,
+.user_profile_setting .addLinkButton button {
   width: 100%;
   background-color: transparent;
   border: 2px solid rgb(103, 73, 186);
+}
+
+.user_profile_setting {
+  position: absolute;
+  background-color: #fff;
+  margin-left: 0;
+  transition: all ease 0.5s;
 }
 
 .links {
@@ -189,22 +212,6 @@
   display: flex;
 }
 
-@media screen and (max-width: 767px) {
-  .preview {
-    margin-left: 0;
-    margin-right: 0;
-  }
-  .links {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .settings {
-    padding-left: 0;
-    margin-right: 0;
-    padding-right: 0;
-    margin-left: 0;
-  }
-}
 .mobile {
   position: relative;
   width: 95%;
@@ -237,17 +244,20 @@
   height: 100px;
 }
 
-.profileInfo, .imagebox {
+.profileInfo,
+.imagebox {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
-.profileInfo p, .imagebox p {
+.profileInfo p,
+.imagebox p {
   color: gray;
 }
 
-.linksBox, .linkBoxWrapper {
+.linksBox,
+.linkBoxWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -284,6 +294,10 @@
   margin-right: 10px;
 }
 
+.nextBtn, .saveBtn {
+  margin-top: 10px;
+}
+
 .mobile_sub_wraper {
   display: flex;
   padding-top: 50px;
@@ -299,4 +313,157 @@
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+.userProfileImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 200px;
+  width: 100%;
+}
+.userProfileImage .uploader {
+  position: relative;
+  height: 150px;
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.userProfileImage .uploader img {
+  height: 150px;
+}
+.userProfileImage .uploader::after {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  content: "Upload";
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 20px;
+  transition: all ease 0.3s;
+  cursor: pointer;
+}
+.userProfileImage .uploader:hover:after {
+  top: 50%;
+}
+
+#upload_profile {
+  visibility: hidden;
+}
+
+@media screen and (max-width: 767px) {
+  .preview {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .links {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .settings {
+    padding-left: 5px;
+    margin-right: 5px;
+    padding-right: 5px;
+    margin-left: 5px;
+  }
+}
+.image_wrapper_profileView {
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}
+.image_wrapper_profileView img {
+  height: 150px;
+  width: 150px;
+}
+
+.profileViewMainWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: url("/static/images/background.svg");
+  background-repeat: no-repeat;
+}
+
+.profileViewCol {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+  flex-direction: column;
+  background-color: #fff;
+  max-height: 700px;
+  height: 700px;
+  width: 400px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 15px;
+}
+
+.profileDetailsView {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.profileDetailsView p {
+  color: gray;
+}
+
+.linksView {
+  border: 2px solid red;
+  width: 100%;
+  height: 420px;
+  overflow: hidden;
+}
+.linksView .linkWrapper {
+  width: 100%;
+  height: 410px;
+  overflow-y: scroll;
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  flex-direction: column;
+  gap: 10px;
+}
+.linksView .linkWrapper li {
+  width: 70%;
+  min-height: 50px;
+  height: 50px;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+}
+.linksView .linkWrapper a {
+  text-align: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  text-decoration: none;
+}
+.linksView .linkWrapper a .icon i {
+  margin-right: 10px;
 }
