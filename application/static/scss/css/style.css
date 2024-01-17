@@ -11,9 +11,14 @@
   border: none;
   outline: none;
   border-radius: 10px;
+  transition: all ease 0.2s;
 }
 .myButton span {
   margin-right: 8px;
+}
+.myButton:hover {
+  background-color: rgb(103, 73, 186);
+  color: #fff;
 }
 
 .navbar_wrapper {
@@ -43,6 +48,10 @@
   color: #fff;
   border-radius: 8px;
 }
+.navbar_wrapper .col:first-child h1 .text {
+  background-color: transparent;
+  color: rgb(103, 73, 186);
+}
 .navbar_wrapper .col:last-child button:first-child {
   background-color: transparent;
   color: gray;
@@ -54,6 +63,11 @@
 .navbar_wrapper .col:last-child button:last-child {
   background-color: transparent;
   border: 2px solid rgb(228, 220, 248);
+  transition: all ease 0.2s;
+}
+.navbar_wrapper .col:last-child button:last-child:hover {
+  background-color: rgb(103, 73, 186);
+  border: none;
 }
 
 .link_icon {
@@ -69,6 +83,25 @@
   padding-left: 40px;
 }
 
+#preview {
+  text-decoration: none;
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .navbar_wrapper .text {
+    display: none;
+  }
+  .navbar_wrapper button {
+    background-color: none !important;
+  }
+  .navbar_wrapper .col:first-child h1 {
+    font-size: 1.2rem;
+  }
+  .navbar_wrapper .col:first-child h1 span i {
+    font-size: 1rem;
+  }
+}
 .main_container {
   width: 100vw;
   height: 100vh;
@@ -139,6 +172,10 @@
   width: 100%;
   background-color: transparent;
   border: 2px solid rgb(103, 73, 186);
+}
+.settings .addLinkButton button:hover,
+.user_profile_setting .addLinkButton button:hover {
+  background-color: rgb(103, 73, 186);
 }
 
 .user_profile_setting {
@@ -256,6 +293,17 @@
   color: gray;
 }
 
+.profileInfo {
+  max-width: 300px;
+  width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.profileInfo h3, .profileInfo p {
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
 .linksBox,
 .linkBoxWrapper {
   display: flex;
@@ -292,6 +340,42 @@
 }
 .linkBoxWrapper a .icon i {
   margin-right: 10px;
+}
+
+.share_link {
+  width: 100%;
+  margin-top: 10px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.share_link .sharelink_wrapper {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.share_link .sharelink_wrapper a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.share_link .sharelink_wrapper a #linkIcon {
+  color: gray;
+}
+.share_link .sharelink_wrapper a #shareLink {
+  color: blue;
+}
+.share_link .sharelink_wrapper #copy {
+  cursor: pointer;
+  transition: color ease-in-out 0.3s;
+}
+.share_link .sharelink_wrapper #copy:hover {
+  color: green;
 }
 
 .nextBtn, .saveBtn {
@@ -378,8 +462,19 @@
     padding-right: 5px;
     margin-left: 5px;
   }
+  .profileInfo {
+    max-width: 180px;
+    width: 180px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .profileInfo h3, .profileInfo p {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
 }
 .image_wrapper_profileView {
+  min-height: 150px;
   border-radius: 50%;
   overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
@@ -394,6 +489,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  overflow: auto;
   background: url("/static/images/background.svg");
   background-repeat: no-repeat;
 }
@@ -421,12 +517,15 @@
   flex-direction: column;
   margin-top: 20px;
 }
+.profileDetailsView h3, .profileDetailsView p {
+  width: 100%;
+  overflow-wrap: break-word;
+}
 .profileDetailsView p {
   color: gray;
 }
 
 .linksView {
-  border: 2px solid red;
   width: 100%;
   height: 420px;
   overflow: hidden;
@@ -466,4 +565,13 @@
 }
 .linksView .linkWrapper a .icon i {
   margin-right: 10px;
+}
+
+@media screen and (max-width: 767px) {
+  .profileViewCol {
+    width: 330px;
+  }
+  .image_wrapper_profileView {
+    margin-top: 50px;
+  }
 }

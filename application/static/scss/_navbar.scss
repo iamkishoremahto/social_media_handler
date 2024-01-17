@@ -5,9 +5,15 @@
     border: none;
     outline:none;
     border-radius: 10px;
+    transition: all ease 0.2s;
 
     span{
         margin-right: 8px;
+    }
+
+    &:hover{
+        background-color: $purple;
+        color: $white;
     }
 }
 
@@ -37,6 +43,11 @@
                     padding: 5px;
                     color:$white;
                     border-radius: 8px;
+                    
+                }
+                .text{
+                    background-color: transparent;
+                    color: $purple;
                 }
 
             }
@@ -57,6 +68,12 @@
                 &:last-child{
                     background-color: transparent;
                     border: 2px solid $ligh_purple;
+                    transition: all ease 0.2s;
+                    &:hover{
+                        background-color: $purple;
+                        border: none;
+                        
+                    }
                 }
 
 
@@ -79,5 +96,33 @@
     }
     input{
         padding-left: 40px;
+    }
+}
+
+#preview{
+    text-decoration: none;
+    display: none;
+}
+
+@media screen and (max-width: 767px){
+    .navbar_wrapper{
+        .text{
+            display: none;
+        }
+        button{
+            background-color: none !important;
+        }
+        .col{
+            &:first-child{
+                h1{
+                    font-size: 1.2rem;
+                    span i{
+                        font-size: 1rem;
+                    }
+                }
+            }
+
+           
+        }
     }
 }

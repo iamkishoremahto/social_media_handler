@@ -35,13 +35,13 @@ function dropdownHandler(new_div, link_button) {
                     else {
                         selected_option_icon = selected_option_text.toLowerCase()
                     }
-                    
+
                     link_button.querySelector('.icon').innerHTML = `<i
                     class="fa-brands fa-${selected_option_icon}"></i>${selected_option_text}</span>`
-                    console.log(social_color[selected_option_text])
+               
                     link_button.style.backgroundColor = `${social_color[selected_option_text]}`;
                     select_options.classList.remove('show');
-                    
+
                     arrow.classList.remove("arrow_rotate");
                 });
             })
@@ -165,7 +165,7 @@ async function profilePicHandler() {
 
         }
 
-     
+
     });
     imageUploadBtn.addEventListener('click', () => {
 
@@ -175,51 +175,84 @@ async function profilePicHandler() {
 
 }
 
-function emailFieldHandler(){
+function emailFieldHandler() {
     let email = document.querySelector('#email');
 
-    email.addEventListener('keydown', () =>{
+    email.addEventListener('keydown', () => {
         let nameChange = document.querySelector('.profileInfo p');
         nameChange.textContent = email.value;
     })
 
-    email.addEventListener('change', () =>{
+    email.addEventListener('change', () => {
         let nameChange = document.querySelector('.profileInfo p');
         nameChange.textContent = email.value;
     })
-    
+
 }
 
-function nameFieldHandler(){
+function nameFieldHandler() {
     let name = document.getElementById('name');
-    name.addEventListener('keydown', () =>{
+    name.addEventListener('keydown', () => {
         let nameChange = document.querySelector('.profileInfo h3');
         nameChange.textContent = name.value;
     })
 
-    name.addEventListener('change', () =>{
+    name.addEventListener('change', () => {
         let nameChange = document.querySelector('.profileInfo h3');
         nameChange.textContent = name.value;
     })
 }
 
-async function updateProfileDetailsIntoDB(){
+async function updateProfileDetailsIntoDB() {
     let profile_pic = document.querySelector('.imagebox .profile').src;
     let name = document.querySelector('.profileInfo h3').textContent;
     let email = document.querySelector('.profileInfo p').textContent;
-    console.log(profile_pic)
-    console.log(name)
-    console.log(email)
-    let links = document.querySelectorAll('.linkBoxWrapper li a')
+  
+    let links = document.querySelectorAll('.linkBoxWrapper li')
     let linksObject = {};
-    links.forEach((link) =>{
-        let value = link.href
+    links.forEach((link) => {
+        let value = link.querySelector('a').href;
         let key = link.querySelector('.icon').textContent
         let backgroundColor = link.style.backgroundColor;
-        let icon = link.querySelector('.icon').classList[1]
-        linksObject[key] = {href: value, icon: icon, background:backgroundColor, icon}
+        let icon = link.querySelector('.icon i').classList[1]
+        linksObject[key] = { href: value, icon: icon, background: backgroundColor }
     })
-    console.log(linksObject)
+    let dataObject = { name: name, email: email, profile_pic: profile_pic, social_handlers: linksObject }
+
+    let respone = await fetch('/create_profile', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataObject)
+    })
+    let responeData = await respone.json()
+    let status = await responeData.status
+    if (status === 200) {
+        let url = await responeData.url;
+        let set_url = document.querySelector('.sharelink_wrapper a')
+        let show_url = document.getElementById('shareLink')
+
+        set_url.href = url;
+        show_url.textContent = url
+        let preview = document.getElementById('preview');
+        preview.href = set_url;
+        preview.style.display = 'flex';
+        document.querySelector('.share_link').style.display = 'flex';
+        let copyBtn = document.querySelector('#copy')
+        copyBtn.addEventListener('click', () => {
+            let textarea = document.createElement('textarea')
+            textarea.value = show_url.textContent;
+            document.body.appendChild(textarea)
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+        });
+
+
+
+
+    }
 }
 
 emailFieldHandler()

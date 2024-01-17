@@ -6,19 +6,23 @@
     <div class="row profileViewRow">
         <div class="col profileViewCol">
             <div class="image_wrapper_profileView">
-                <img src="{{ url_for('static', filename = 'images/user.jpg') }}" alt="image" class="img-fluid">
+                <img src="{{ data['profile_pic'] }}" alt="image" class="img-fluid">
       
             </div>
             <div class="profileDetailsView">
-                <h3>Kishore Kumar Mahto</h3>
-                <p>kishore@gmail.com</p>
+                <h3>{{ data['name'] }}</h3>
+                <p>{{ data['email'] }}</p>
             </div>
             <div class="linksView">
              <ul class="linkWrapper">
-                <li class = "link_icons">
-                    <a href="#" target = "_blank"><span class="icon"><i class="fa-brands fa-bandcamp"></i>Social Media</span><span class="arrow"><i
+                {% for key in data['social_handlers'].keys() %}
+             
+                <li class = "link_icons" style="background-color: {{ data['social_handlers'][key]['background'] }};">
+                    <a href="{{ data['social_handlers'][key]['href'] }}" target = "_blank"><span class="icon"><i class="fa-brands {{ data['social_handlers'][key]['icon'] }}"></i>{{ key }}</span><span class="arrow"><i
                         class="fa-solid fa-arrow-right"></i></span></a>
                 </li>
+                {% endfor %}
+                
              
              </ul>
             </div>

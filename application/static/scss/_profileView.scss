@@ -1,4 +1,5 @@
 .image_wrapper_profileView{
+    min-height: 150px;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
@@ -14,6 +15,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+    overflow: auto;
     background: url('/static/images/background.svg');
     background-repeat: no-repeat;
 
@@ -45,14 +47,20 @@
     justify-content: center;
     flex-direction: column;
     margin-top: 20px;
+       
+      
 
+    h3,p{
+        width: 100%;
+        overflow-wrap: break-word;
+    }
     p{
         color: $gray;
     }
 }
 
 .linksView{
-    border: 2px solid red;
+  
     width: 100%;
     height: 420px;
     overflow: hidden;
@@ -99,5 +107,18 @@
                 }
             }
         }
+    }
+}
+
+
+@media screen and ( max-width: 767px ){
+    .profileViewCol{
+        width: 330px;
+      
+    }
+
+    .image_wrapper_profileView{
+        margin-top: 50px;
+        
     }
 }
