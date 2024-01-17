@@ -186,7 +186,7 @@
 }
 .settings .addLinkButton button:hover,
 .user_profile_setting .addLinkButton button:hover {
-  background-color: rgb(103, 73, 186);
+  background-color: rgb(228, 220, 248) !important;
 }
 
 .user_profile_setting {
