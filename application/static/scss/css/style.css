@@ -4,23 +4,6 @@
   box-sizing: border-box;
 }
 
-.myButton {
-  padding: 10px 15px;
-  background-color: rgb(228, 220, 248);
-  color: rgb(103, 73, 186);
-  border: none;
-  outline: none;
-  border-radius: 10px;
-  transition: all ease 0.2s;
-}
-.myButton span {
-  margin-right: 8px;
-}
-.myButton:hover {
-  background-color: rgb(103, 73, 186);
-  color: #fff;
-}
-
 .navbar_wrapper {
   display: flex;
   align-items: center;
@@ -53,8 +36,6 @@
   color: rgb(103, 73, 186);
 }
 .navbar_wrapper .col:last-child button:first-child {
-  background-color: transparent;
-  color: gray;
   border: none;
 }
 .navbar_wrapper .col:last-child button:first-child span {
@@ -86,6 +67,36 @@
 #preview {
   text-decoration: none;
   display: none;
+}
+
+.commonBtn {
+  padding: 10px 15px;
+  background-color: transparent;
+  color: gray;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  transition: all ease 0.2s;
+}
+.commonBtn span {
+  margin-right: 8px;
+}
+.commonBtn:hover {
+  background-color: rgb(103, 73, 186);
+  color: #fff;
+}
+
+.myButton {
+  padding: 10px 15px;
+  background-color: rgb(228, 220, 248);
+  color: rgb(103, 73, 186);
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  transition: all ease 0.2s;
+}
+.myButton span {
+  margin-right: 8px;
 }
 
 @media screen and (max-width: 767px) {
@@ -447,6 +458,17 @@
   visibility: hidden;
 }
 
+.remove {
+  cursor: pointer;
+}
+.remove:hover {
+  color: darkred;
+}
+
+.select_wrapper {
+  cursor: pointer;
+}
+
 @media screen and (max-width: 767px) {
   .preview {
     margin-left: 0;
@@ -520,6 +542,7 @@
 .profileDetailsView h3, .profileDetailsView p {
   width: 100%;
   overflow-wrap: break-word;
+  text-align: center;
 }
 .profileDetailsView p {
   color: gray;

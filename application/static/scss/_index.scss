@@ -419,7 +419,16 @@
 }
 
 
+.remove{
+    cursor: pointer;
+    &:hover{
+        color: darkred;
+    }
+}
 
+.select_wrapper{
+    cursor: pointer;
+}
 
 
 

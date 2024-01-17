@@ -38,7 +38,7 @@ function dropdownHandler(new_div, link_button) {
 
                     link_button.querySelector('.icon').innerHTML = `<i
                     class="fa-brands fa-${selected_option_icon}"></i>${selected_option_text}</span>`
-               
+
                     link_button.style.backgroundColor = `${social_color[selected_option_text]}`;
                     select_options.classList.remove('show');
 
@@ -76,7 +76,7 @@ function link_box_handler() {
     <label >Link</label>
     <div class="link_icon">
         <span><i class="fa-solid fa-link"></i></span>
-        <input type="text" class="form-control">
+        <input type="text" class="linkInput form-control">
     </div>
     
 `
@@ -111,11 +111,39 @@ function linkButtonHandler() {
     return newLinkButton
 
 }
+function isUrlValid(userInput) {
+    var res = userInput.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+    if (res == null)
+        return false;
+    else
+        return true;
+}
 function profileDetailsHandler() {
-    let offset = document.querySelector('.user_profile_setting').offsetWidth
+
+    let profileBtn = document.querySelector('#profile_details');
+    let linkBtn = document.querySelector('#links');
 
 
-    document.querySelector('.user_profile_setting').style.left = 0 + 'px'
+    let validStatus = false;
+    let allLinks = document.querySelectorAll('.linkInput');
+    allLinks.forEach((checkLink) => {
+        if (isUrlValid(checkLink.value)) {
+            validStatus = true;
+        }
+        else {
+            validStatus = false;
+            alert(`Not Valid Url : ${checkLink.value}`)
+        }
+    });
+    if (validStatus) {
+        profileBtn.classList.add('myButton');
+        linkBtn.classList.remove('myButton');
+        let offset = document.querySelector('.user_profile_setting').offsetWidth
+
+
+        document.querySelector('.user_profile_setting').style.left = 0 + 'px'
+    }
+
 }
 
 function LinksHandler() {
@@ -204,56 +232,69 @@ function nameFieldHandler() {
 }
 
 async function updateProfileDetailsIntoDB() {
+
+
+
     let profile_pic = document.querySelector('.imagebox .profile').src;
     let name = document.querySelector('.profileInfo h3').textContent;
     let email = document.querySelector('.profileInfo p').textContent;
-  
-    let links = document.querySelectorAll('.linkBoxWrapper li')
-    let linksObject = {};
-    links.forEach((link) => {
-        let value = link.querySelector('a').href;
-        let key = link.querySelector('.icon').textContent
-        let backgroundColor = link.style.backgroundColor;
-        let icon = link.querySelector('.icon i').classList[1]
-        linksObject[key] = { href: value, icon: icon, background: backgroundColor }
-    })
-    let dataObject = { name: name, email: email, profile_pic: profile_pic, social_handlers: linksObject }
 
-    let respone = await fetch('/create_profile', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dataObject)
-    })
-    let responeData = await respone.json()
-    let status = await responeData.status
-    if (status === 200) {
-        let url = await responeData.url;
-        let set_url = document.querySelector('.sharelink_wrapper a')
-        let show_url = document.getElementById('shareLink')
+    if (name !== undefined && email !== undefined && name !== null && email !== null && name !== "Your Name" && email !== "email@email.com" && name !== "" && email !== "" && name !== " " && email !== " ") {
 
-        set_url.href = url;
-        show_url.textContent = url
-        let preview = document.getElementById('preview');
-        preview.href = set_url;
-        preview.style.display = 'flex';
-        document.querySelector('.share_link').style.display = 'flex';
-        let copyBtn = document.querySelector('#copy')
-        copyBtn.addEventListener('click', () => {
-            let textarea = document.createElement('textarea')
-            textarea.value = show_url.textContent;
-            document.body.appendChild(textarea)
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-        });
+        let links = document.querySelectorAll('.linkBoxWrapper li')
+        let linksObject = {};
+        links.forEach((link) => {
+            let value = link.querySelector('a').href;
+            let key = link.querySelector('.icon').textContent
+            let backgroundColor = link.style.backgroundColor;
+            let icon = link.querySelector('.icon i').classList[1]
+            linksObject[key] = { href: value, icon: icon, background: backgroundColor }
+        })
+        let dataObject = { name: name, email: email, profile_pic: profile_pic, social_handlers: linksObject }
+
+        let respone = await fetch('/create_profile', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dataObject)
+        })
+        let responeData = await respone.json()
+        let status = await responeData.status
+        if (status === 200) {
+            let url = await responeData.url;
+            let set_url = document.querySelector('.sharelink_wrapper a')
+            let show_url = document.getElementById('shareLink')
+
+            set_url.href = url;
+            show_url.textContent = url
+            let preview = document.getElementById('preview');
+            preview.href = set_url;
+            preview.style.display = 'flex';
+            document.querySelector('.share_link').style.display = 'flex';
+            let copyBtn = document.querySelector('#copy')
+            copyBtn.addEventListener('click', () => {
+                let textarea = document.createElement('textarea')
+                textarea.value = show_url.textContent;
+                document.body.appendChild(textarea)
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+            });
 
 
 
 
+        }
     }
+    else{
+        alert("Please fill your name or email.")
+    }
+
+
 }
+
+
 
 emailFieldHandler()
 nameFieldHandler();
@@ -262,5 +303,12 @@ linkSettingsHandler()
 profilePicHandler()
 document.querySelector('.nextBtn').addEventListener('click', profileDetailsHandler);
 document.querySelector('.saveBtn').addEventListener('click', updateProfileDetailsIntoDB);
+let profileBtn = document.querySelector('#profile_details');
+let linkBtn = document.querySelector('#links');
+
+linkBtn.addEventListener('click', () => {
+    profileBtn.classList.remove('myButton');
+    linkBtn.classList.add('myButton');
+})
 
 
